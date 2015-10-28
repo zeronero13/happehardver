@@ -1,18 +1,21 @@
 #   Alkalmazások fejlesztése gyakorlat
+
 ### Első beadandó feladat
 
 Csoport: AF 6. csoport
 
 Neptun: DF2KIE
 
-[GitHub link] (https://github.com/zeronero13/happehardver) https://github.com/zeronero13/happehardver
+[GitHub link] (https://github.com/zeronero13/happehardver)
 
-[Heroku link] (happehardver.herokuapp.com) happehardver.herokuapp.com
+[Heroku link] (happehardver.herokuapp.com)
     
 **Feladat:**
+
 Ingyenesen hírdetési oldal, ahol felhasználó egy gyors, és ingyenes regisztráció után hírdetések adhat fel.
 
 ### Követelmények
+
 #### Követelmények összegyűjtése: a nyújtandó szolgáltatások ismertetése rövid, szöveges leírásként, sokszor felsorolásként jelenik meg.
 1. Funkcionális elvárások
     
