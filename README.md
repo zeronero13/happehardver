@@ -5,9 +5,9 @@ Csoport: AF 6. csoport
 
 Neptun: DF2KIE
 
-[GitHub link] (https://github.com/zeronero13/af6/tree/master/bead1)
+[GitHub link] (https://github.com/zeronero13/happehardver) https://github.com/zeronero13/happehardver
 
-[Heroku link] (happehardver.herokuapp.com)
+[Heroku link] (happehardver.herokuapp.com) happehardver.herokuapp.com
     
 **Feladat:**
 Ingyenesen hírdetési oldal, ahol felhasználó egy gyors, és ingyenes regisztráció után hírdetések adhat fel.
@@ -182,9 +182,11 @@ A tesztek futtatása: **npm test**
 ### Felhasználói dokumentáció
 **Telepítés lépései: hogyan kerül a Githubról a célgépre a program**
   1. Egyik lehetőség kiadni alábbi parancsot, és klónozni github repot:
-  git clone https://github.com/zeronero13/af6/tree/master/bead1
-    
-  2. Letölteni becsomagolva githubról majd feltölteni
+  git clone https://github.com/zeronero13/happehardver
+
+  2. C9-ről push-olni a projektet adott helyre
+  
+  3. Letölteni becsomagolva githubról majd feltölteni
     
   **Szükséges "dependencies" telepítése**
 
