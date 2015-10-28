@@ -8,7 +8,7 @@ Neptun: DF2KIE
 
 [GitHub link] (https://github.com/zeronero13/happehardver)
 
-[Heroku link] (happehardver.herokuapp.com)
+[Heroku link] (https://happehardver.herokuapp.com)
     
 **Feladat:**
 
