@@ -1,0 +1,60 @@
+<h1>Hírdetéseim böngészése</h1>
+<div class="panel">
+  <form method="get" action="/user/list" class="form-horizontal">
+    <fieldset>
+      
+    <div class="form-group">
+      <label for="search-name" class="col-lg-2 control-label">Hírdetés</label>
+      <div class="col-lg-8">
+        <input type="text" class="form-control" name="nameQuery" id="search-name" {{#if nameQuery}} value="{{nameQuery}}" {{/if}} placeholder="Írja be, hogy mire keres">
+      </div>
+      <div class="col-lg-2">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="search" class="col-lg-2 control-label">Létrehozva</label>
+      <div class="col-lg-8">
+        <input type="date" class="form-control" 
+               name="dateQuery" id="search" 
+               {{#if dateQuery}}
+               value="{{dateQuery}}"
+               {{/if}}
+               placeholder="Írja be, hogy milyen dátumra keres">
+      </div>
+      <div class="col-lg-2">
+        <input type="submit" class="btn btn-primary" value="Keresés">
+      </div>
+    </div>
+    </fieldset>
+  </form>
+</div>
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>Hírdetés</th>
+      <th>Kategória</th>
+      <th>Felhasználó</th>
+      <th>Létrehozva</th>
+      <th>Módosítva</th>
+      <th>Ár</th>
+      <th>Opciók</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each data as |product|}}
+    <tr>
+      <td><a href="list/{{product.id}}" title="{{product.itemName}}">{{product.itemName}}</a></td>
+      <td>{{product.category.categoryName}}</td>
+      <td>{{product.user.username}}</td>
+      <td>{{{formatDate product.createdAt "YYYY/MM/DD"}}}</td>
+      <td>{{{formatDate product.updatedAt "YYYY/MM/DD HH:mm:ss"}}}</td>
+      <td>{{product.itemPrice}} HUF</td>
+      <td>
+        <a href="/user/edit/{{product.id}}">Szerkesztés</a>
+        <a href="/user/delete/{{product.id}}">Törlés</a>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table> 

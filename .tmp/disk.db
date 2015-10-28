@@ -1,0 +1,187 @@
+{
+  "data": {
+    "category": [
+      {
+        "categoryName": "Alaplapok",
+        "createdAt": "2015-10-27T10:34:24.207Z",
+        "updatedAt": "2015-10-27T10:34:24.207Z",
+        "id": 1
+      },
+      {
+        "categoryName": "SSD",
+        "createdAt": "2015-10-27T10:34:28.050Z",
+        "updatedAt": "2015-10-27T10:34:28.050Z",
+        "id": 2
+      },
+      {
+        "categoryName": "HDD",
+        "createdAt": "2015-10-27T10:34:31.854Z",
+        "updatedAt": "2015-10-27T10:34:31.854Z",
+        "id": 3
+      },
+      {
+        "categoryName": "Tápegység",
+        "createdAt": "2015-10-27T10:34:37.296Z",
+        "updatedAt": "2015-10-27T10:34:37.296Z",
+        "id": 4
+      },
+      {
+        "categoryName": "Monitor",
+        "createdAt": "2015-10-27T10:34:45.199Z",
+        "updatedAt": "2015-10-27T10:34:45.199Z",
+        "id": 5
+      }
+    ],
+    "item": [
+      {
+        "itemName": "Dell Monitor &quot;19",
+        "itemPrice": 56000,
+        "itemDescription": "Dell Monitor leírása",
+        "category": 5,
+        "user": 1,
+        "createdAt": "2015-10-26T10:35:16.096Z",
+        "updatedAt": "2015-10-26T10:35:16.096Z",
+        "id": 1
+      },
+      {
+        "itemName": "Samsung 256 GB 850 EVO",
+        "itemPrice": 29000,
+        "itemDescription": "- Samsung 850 EVO széria\r\n- 2.5&quot; beszerelési méretek\r\n- 250GB össz tároló kapacitás\r\n- SATA-3 6GB&#x2F;s csatlakoztatás\r\n- Írási sebesség: 520MB&#x2F;s\r\n- Olvasási sebesség: 540MB&#x2F;s\r\n- 88000&#x2F;40000 IOPS műveletek\r\n- Samsung MGX Vezérlőegység\r\n- 2.4W átlagos áram felvétel\r\n- 7mm magasság, AES 256bit",
+        "category": 2,
+        "user": 1,
+        "createdAt": "2015-10-27T10:38:17.114Z",
+        "updatedAt": "2015-10-27T10:38:17.114Z",
+        "id": 2
+      }
+    ],
+    "user": [
+      {
+        "username": "abcdef",
+        "password": "$2a$10$G694vXb2cVxDr3WEiu1.fO.Hrj4jhBQnjk.nCRhzQhZ3hrnfZR9c6",
+        "surname": "Gipsz",
+        "forename": "Jakab",
+        "avatar": "",
+        "email": "",
+        "role": "user",
+        "createdAt": "2015-10-27T20:21:51.852Z",
+        "updatedAt": "2015-10-27T20:21:51.852Z",
+        "id": 15
+      },
+      {
+        "surname": "a",
+        "forename": "b",
+        "username": "zeronero",
+        "password": "$2a$10$yimndfMFbZuLLocjH52tbOxlFbGgIQeLnybThzKOWSf1aXoTHAtNy",
+        "avatar": "",
+        "role": "user",
+        "createdAt": "2015-10-28T14:40:26.103Z",
+        "updatedAt": "2015-10-28T14:40:26.103Z",
+        "id": 1
+      }
+    ]
+  },
+  "schema": {
+    "category": {
+      "categoryName": {
+        "type": "string"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "item": {
+      "itemName": {
+        "type": "string"
+      },
+      "itemPrice": {
+        "type": "integer",
+        "defaultsTo": 0
+      },
+      "itemDescription": {
+        "type": "string"
+      },
+      "user": {
+        "type": "integer",
+        "model": "user",
+        "foreignKey": true,
+        "alias": "user"
+      },
+      "category": {
+        "type": "integer",
+        "model": "category",
+        "foreignKey": true,
+        "alias": "category"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "user": {
+      "username": {
+        "type": "string",
+        "unique": true
+      },
+      "surname": {
+        "type": "string"
+      },
+      "forename": {
+        "type": "string"
+      },
+      "password": {
+        "type": "string"
+      },
+      "email": {
+        "type": "string"
+      },
+      "role": {
+        "type": "string",
+        "enum": [
+          "user",
+          "operator"
+        ],
+        "defaultsTo": "user"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    }
+  },
+  "counters": {
+    "category": {
+      "id": 5
+    },
+    "item": {
+      "id": 5
+    },
+    "user": {
+      "id": 20
+    }
+  }
+}
