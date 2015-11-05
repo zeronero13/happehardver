@@ -8,14 +8,28 @@ function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     }
-    req.flash('warning', 'A kért tartalom megjelenítéséhez bejelentkezés szükséges');
-    res.redirect('/login');
+    req.flash('info', 'A kért tartalom megjelenítéséhez bejelentkezés szükséges');
+    res.redirect('/auth/login');
+}
+
+function andRestrictTo(role) {
+    return function(req, res, next) {
+        if (req.user.role == role) {
+            next();
+        } else {
+            //next(new Error('Unauthorized'));
+            req.flash('info', 'A kért tartalomhoz megfelelő jogosultság szükséges');
+            res.redirect('/auth/login');
+        }
+    }
 }
 
 router.route('/auth/login')
     .get(function(req, res) {
+        //console.log("Error: '"+req.flash('error')+"' Info: '"+req.flash('info')+"' ");
         res.render('auth/login', {
-            title: sitename
+            title: sitename,
+            uzenetek: req.flash()
         });
     })
     .post(passport.authenticate('local-login', {
@@ -28,7 +42,8 @@ router.route('/auth/login')
 router.route('/auth/signup')
     .get(function(req, res) {
         res.render('auth/signup', {
-            title: sitename
+            title: sitename,
+            uzenetek: req.flash()
         });
     })
     .post(passport.authenticate('local-signup', {
@@ -44,11 +59,11 @@ router.use('/auth/logout', function(req, res) {
 });
 
 
-// Itt kellene megoldani a végpontokat
-//
+
 router.get('/', function(req, res) {
     res.render('home', {
-        title: sitename
+        title: sitename,
+        uzenetek: req.flash()
     });
 });
 
@@ -70,17 +85,6 @@ router.route('/list').get(function(req, res) {
         var keresettDatum = new Date(req.query.dateQuery);
         var nextDay = new Date();
         nextDay.setTime(keresettDatum.getTime() + 86400000);
-        //date.setTime( date.getTime() + days * 86400000 );
-
-        //var keresettDatum = new Date(req.query.dateQuery).toISOString();
-        //var keres= new Date("2015-10-26T23:07:34.259Z");
-
-        //console.log(req.query.dateQuery);
-        //console.log(keresettDatum);
-        //console.log(new Date().toISOString() );
-
-        //console.log(keresettDatum);
-        //console.log(nextDay);
 
         result = req.app.Models.item.find({
             createdAt: {
@@ -337,13 +341,13 @@ router.use('/user/delete/:id', ensureAuthenticated, function(req, res) {
 
 //operátor 
 router.route('/op/categories/')
-    .get(ensureAuthenticated, function(req, res) {
+    .get(ensureAuthenticated, andRestrictTo('operator'), function(req, res) {
         res.render('op/category', {
             title: sitename,
             uzenetek: req.flash()
         });
     })
-    .post(ensureAuthenticated, function(req, res) {
+    .post(ensureAuthenticated, andRestrictTo('operator'), function(req, res) {
         req.sanitize('categoryName').escape();
         req.sanitize('categoryName').trim();
         req.checkBody('categoryName', 'Hiba a névvel')

@@ -73,10 +73,21 @@
         "username": "zeronero",
         "password": "$2a$10$yimndfMFbZuLLocjH52tbOxlFbGgIQeLnybThzKOWSf1aXoTHAtNy",
         "avatar": "",
-        "role": "user",
+        "role": "operator",
         "createdAt": "2015-10-28T14:40:26.103Z",
         "updatedAt": "2015-10-28T14:40:26.103Z",
         "id": 1
+      },
+      {
+        "surname": "ab",
+        "forename": "sds",
+        "username": "userun",
+        "password": "$2a$10$TPadVbKckTxlDssU9AdA..8N3XLv0nKR5ldqLqwZX1Awijkmsubpu",
+        "avatar": "",
+        "role": "user",
+        "createdAt": "2015-11-05T19:30:33.941Z",
+        "updatedAt": "2015-11-05T19:30:33.941Z",
+        "id": 21
       }
     ]
   },
@@ -181,7 +192,7 @@
       "id": 5
     },
     "user": {
-      "id": 20
+      "id": 21
     }
   }
 }

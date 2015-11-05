@@ -38,6 +38,7 @@ passport.deserializeUser(function(obj, done) {
     done(null, obj);
 });
 
+
 // setup: Local Strategy for sign-up
 passport.use('local-signup', new LocalStrategy({
         usernameField: 'username',
@@ -115,7 +116,8 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(express.static(__dirname + '/public'));
-//app.use('/auth',express.static(__dirname + '/public')); //? .../auth/login kéri-> .../auth/css/bootstrap.min.css
+//app.use('/public', express.static(__dirname + '/public'));
+//app.use('/auth',express.static(__dirname + '/public'));
 
 hbs.registerPartials(__dirname + '/views/partials');
 
@@ -127,6 +129,8 @@ app.set('views', __dirname + '/views');
 
 var router = require('./router');
 app.use(router);
+
+//app.use('/errors', ensureAuthenticated, errorRouter);
 
 //
 orm.loadCollection(require('./models/category'));
