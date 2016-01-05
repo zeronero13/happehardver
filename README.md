@@ -35,47 +35,63 @@ Ingyenesen hírdetési oldal, ahol felhasználó egy gyors, és ingyenes regiszt
   - Regisztrált, bejelentkezett felhaszálók kik képesek saját hírdetéseiket listázni, keresni közöttük. Felvenni új hírdetéseket, szerkeszteni azokat, illetve törölni közülük.
   3. Operátorként bejelentkezett
   - Operátorok, avagy adminisztrátorok kik az oldalon található tartalom szerkesztésért, moderálásért, és egyéb mindennapos eseményekkel foglalkoznak.
+
+  * Szerepkörök, felhasználó használatieset-modell (docs/images/user_usecase.png)
+![Felhasználó bejelentkezése](docs/images/user_usecase.png)
  
 ### Tervezés
 
 #### Architektúra terv
 1. komponensdiagram
 2. Oldaltérkép
-  + /                 Index oldal
-  + /list             Listázni, és keresni a hírdetéseket
-  + /auth/login       Felhasználó beléptetése
-  + /auth/signup      Felhasználó regisztráció
-  + /auth/logout      Felhasználó kiléptetése
-  + /user/list        Felhasználó tételeinek listázása, keresés
-  + /user/upload      Felhasználó hírdetés feladása
-  + /user/edit/:id    Felhasználó adott :id hírdetésének szerkesztése    
-  + /user/delete/:id  Felhasználó adott :id hírdetésének törlése
-  + /op/categories    Oldal operátornak oldal kategóriák listázása, modósítása (jelenleg csak felvétel)
+  **Publikus (Vendégek):**
+  - Főoldal
+  - Böngészés
+  - Információ
+  - GYIK
+  - Bejelentkezés
+
+  **Bejelentkezett felhasználó :**
+  - Főoldal
+  - Böngészés
+  - Információ
+  - GYIK
+  - Bejelentkezés/ Kijelentkezés
+  - Hírdetés lista
+    * Hírdetés felvétele
+    * Hírdetés törlése
+    * Hírdetés szerkesztése
+    * Hírdetés megtekintése
+
+  **Operátor:**
+  - Főoldal
+  - Böngészés
+  - Információ
+  - GYIK
+  - Bejelentkezés/ Kijelentkezés
+  - Hírdetés kategóriák
+    * Kategória felvétele
+  - Hírdetés lista
+    * Hírdetés felvétele
+    * Hírdetés törlése
+    * Hírdetés szerkesztése
+    * Hírdetés megtekintése
+
 3. Végpontok
-  + /
-  Get: Oldal megejelenítés
-  + /list
-  Get: Oldal megejelenítés
-  + /auth/login
-  Get: Oldal megejelenítés
-  + /auth/signup
-  Get: Oldal megejelenítés
-  Post: Megprobálja belépteti a usert majd átirányít
-  + /auth/logout
-  Use: Kilépteti a felhasználó
-  + /user/list
-  et: Oldal megejelenítés
-  + /user/upload
-  Get: Oldal megejelenítés
-  Post: Felhasználó által feltölteni kívánt tétel feldolgozása
-  + /user/edit/:id
-  Get: Oldal megejelenítés
-  Post: Felhasználó tételének modósításának feldolgozása
-  + /user/delete/:id
-  Use: Felhasználó tételének törlése feldolgozása
-  + /op/categories
-  Get: Operátor oldal megejelenítés
-  Post: Kategória felvételének feldolgozása
+  + GET /: Oldal megejelenítés
+  + GET /list: Oldal megejelenítés
+  + GET /auth/login: Oldal megejelenítés
+  + GET /auth/signup: Oldal megejelenítés
+  + POST /auth/signup: Megprobálja belépteti a usert majd átirányít
+  + USE /auth/logout: Kilépteti a felhasználó
+  + GET /user/list: Oldal megejelenítés
+  + GET /user/upload: Oldal megejelenítés
+  + POST /user/upload: Felhasználó által feltölteni kívánt tétel feldolgozása
+  + GET /user/edit/:id: Oldal megejelenítés
+  + POST /user/edit/:id: Felhasználó tételének modósításának feldolgozása
+  + USE /user/delete/:id: Felhasználó tételének törlése feldolgozása
+  + GET /op/categories: Operátor oldal megejelenítés
+  + POST /op/categories: Kategória felvételének feldolgozása
 
 #### Felhasználóifelület-modell
 1. Oldalvázlatok
@@ -85,8 +101,11 @@ Ingyenesen hírdetési oldal, ahol felhasználó egy gyors, és ingyenes regiszt
   * Felhasználó bejelentkezése (docs/images/login_mockup.jpg)
 ![Felhasználó bejelentkezése](docs/images/login_mockup.jpg)
 
-  * Felhasználó hírdetls feltöltése (docs/images/upload_mockup.jpg)
+  * Felhasználó hírdetés feltöltése (Nem modal esetén) (docs/images/upload_mockup.jpg)
 ![Felhasználó hírdetls feltöltése](docs/images/upload_mockup.jpg)
+
+  * Felhasználó hírdetés feltöltése (Modal esetén) (docs/images/uploadModal_mockup.jpg)
+![Felhasználó hírdetls feltöltése](docs/images/uploadModal_mockup.jpg)
 
 2. Designterv (végső megvalósítás kinézete)
 
@@ -185,6 +204,7 @@ A tesztek futtatása: **npm test**
 ### Felhasználói dokumentáció
 **Telepítés lépései: hogyan kerül a Githubról a célgépre a program**
   1. Egyik lehetőség kiadni alábbi parancsot, és klónozni github repot:
+
   git clone https://github.com/zeronero13/happehardver
 
   2. C9-ről push-olni a projektet adott helyre
@@ -203,3 +223,64 @@ A tesztek futtatása: **npm test**
   **App elindítása**
   
   npm start
+  
+### Feladat továbbfejlesztése
+II. Beadandó (opcionális)
+  
+Feladat a meglévő szerveroldali webalkalmazás progresszív fejlesztése a kliensoldalon, azaz olyan kliensoldali JavaScript kódok írása, melyek nélkül az alkalmazás továbbra is működőképes, de meglétükkel az alkalmazás használata kényelmesebb, gyorsabb, felhasználóbarátabb. Elvárások:
+
+  **Tétel felvétele (AJAX + JQuery.modal megjelen)**
+  Funkció szöveges leírása:
+  
+  Új tétel felvételekor, kicsi modal megnyilik melyben ki lehet tölteni és elküldeni feldolgozásra AJAX segítségével.
+  
+  Szerver érintett fájlok:
+  * ./routes.js
+
+  Kliens érintett fájlok:
+  * ./public/js/scripts.js
+
+  Egyéb érintett fájlok:
+  * ./views/layout.hbs
+
+  Funkció működésének leírása:
+  + layout.hbs-ben megadjuk, hogy töltse be a scripts.js-et fájlt
+  + jquery bindeli, hogy "új tétel" linkre kattintás esetén fusson le funkció
+  + nem engedjük meg a link default eseményét
+  + modalt elrejtjük
+  + GET /user/upload/ kérünk egy kérést, ez layout nélkül lerendeli a felvíteli form-ot amit mikor megjön a válasz betöltünk a modal-ba
+    * Ha reset gombra kattintunk, default eseményt megakadályozzuk, és elrejtjük a modalt.
+    * Ha elküldés gombra kattintunk, POST /user/upload küldünk egy kérést a szérializált megadott adatokkal
+      - Ha rendben kóddal visszatér, megjelenitjük az üzenetet amit kaptunk, betöltjük aszinkron újra a hírdetések listát, majd elrejtük közbe a modalt.
+      - Ha hibával tér vissza, megjelenítjüka hiba üzenetét és elrejtjük a modalt.
+  + modalt megjelenítjük
+  
+  Szekvenciadiagram:
+  * Hírdetés feltöltése sikeresen (AJAX) (docs/images/ajax_upload_item.jpg)
+![Hírdetés feltöltése (AJAX)](docs/images/ajax_upload_item.jpg)
+
+  **Tétel törlése**
+  Funkció szöveges leírása:
+  
+  Új tétel felvételekor, kicsi modal megnyilik melyben ki lehet tölteni és elküldeni feldolgozásra AJAX segítségével.
+  
+  Szerver érintett fájlok:
+  * ./routes.js
+
+  Kliens érintett fájlok:
+  * ./public/js/scripts.js
+  * 
+  Egyéb érintett fájlok:
+  * ./views/layout.hbs
+
+  Funkció működésének leírása:
+  + layout.hbs-ben megadjuk, hogy töltse be a scripts.js-et fájlt
+  + jquery bindeli, hogy "törlés" linkre kattintás esetén fusson le funkció
+  + nem engedjük meg a link default eseményét
+  + küldünk egy GET /user/delete/:id aszinkron kérést, ahol a link href attribútumából vesszük ki címet
+    * Ha siker kóddal tér vissza akkor a tételt fadeOut-tal direktbe kitöröljük, ezután megjelenítjük a kapott üzenetet.
+    * Ha hiba kóddal tér vissza akkor megjelenítjük a hiba üzenetét.
+  
+  Szekvenciadiagram:
+  * Hírdetés törlése sikeresen (AJAX) (docs/images/ajax_delete_item.jpg)
+![Hírdetés törlése (AJAX)](docs/images/ajax_delete_item.jpg)

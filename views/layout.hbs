@@ -5,33 +5,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Régi!</title>
+    <title>happehardver!</title>
 
     <meta name="description" content="eStore!">
-    <meta name="author" content="eStore!">
-
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
+    <meta name="author" content="H.M.">
+    
+    <script src="/public/js/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/style.css">
 
   </head>
   <body>
 
     <div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			{{>menu}}
-			<div class="container">
+    	<div class="row">
+    		<div class="col-md-12">
+    		  {{>menu}}
+    		  <div class="container" id="mainContainer">
+    			  {{>messages}}
+    			  <div id="bodyContainer">
+    			  {{{body}}}
+    			  </div>
+    		  </div>
+    		  
+      		<div class="modal fade bs-example-modal-lg" id="newModal">
+      		  <div class="modal-dialog modal-lg">
+      		    <div class="modal-content">
+      		      <div class="modal-header">
+      		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      		      </div>
+      		      <div class="modal-body">
+      		        <!-- /.modal-body -->
+      		      </div>
+      		    </div><!-- /.modal-content -->
+      		  </div><!-- /.modal-dialog -->
+      		</div><!-- /.modal -->
+    		
+    		</div>
+    	</div>
+    </div>
 
-				{{>messages}}
-				{{{body}}}
-
-			</div>
-		</div>
-	</div>
-</div>
-
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/scripts.js"></script>
+    <script src="/public/js/scripts.js"></script>
   </body>
 </html>

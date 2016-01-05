@@ -7,10 +7,12 @@ var diskAdapter = require('sails-disk');
 var flash = require('connect-flash');
 var validator = require('express-validator');
 var hbs = require('hbs');
-var moment = require('moment');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var ormConfig = require('./config/waterline');
+var moment = require('moment');
+
+var sitename = "Happe hardver";
 
 hbs.registerHelper('formatDate', function(date, format) {
     return moment(date).format(format);
@@ -21,7 +23,7 @@ app.use(session({
     cookie: {
         maxAge: 60000
     },
-    secret: 'titkos szoveg',
+    secret: 'ibfiyegfiyegfe',
     resave: false,
     saveUninitialized: false,
 }));
@@ -81,49 +83,35 @@ passport.use('local-login', new LocalStrategy({
 ));
 
 // Middleware segédfüggvény
-function setLocalsForLayout() {
+function setLocalsForLayout() {//pl. nem kell flasht beallitani külön mindegyiknél!!!
     return function(req, res, next) {
         res.locals.loggedIn = req.isAuthenticated();
         res.locals.user = req.user;
         res.locals.uzenetek = req.flash();
+        res.locals.title = sitename;
         next();
     }
 }
 
 app.use(flash());
 app.use(validator());
-
 app.use(setLocalsForLayout());
 
 var orm = new Waterline();
-/*var ormConfig = {
-    adapters: {
-        disk: diskAdapter
-    },
-    connections: {
-        disk: {
-            adapter: 'disk'
-        }
-    },
-    defaults: {
-        migrate: 'alter'
-    }
-};*/
 
 //
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/public', express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + '/public'));
 
-app.use(express.static(__dirname + '/public'));
 //app.use('/public', express.static(__dirname + '/public'));
 //app.use('/auth',express.static(__dirname + '/public'));
 
 hbs.registerPartials(__dirname + '/views/partials');
-
 app.set('view engine', 'hbs');
-app.engine('hbs', require('hbs').__express);
 app.set('views', __dirname + '/views');
+//app.engine('hbs', require('hbs').__express);//?
+
 
 // Itt kellene megoldani az űrlapkezelést
 

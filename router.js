@@ -2,7 +2,6 @@ var express = require('express');
 var router = new express.Router;
 var passport = require('passport');
 
-var sitename = "Happe hardver";
 //
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
@@ -26,11 +25,7 @@ function andRestrictTo(role) {
 
 router.route('/auth/login')
     .get(function(req, res) {
-        //console.log("Error: '"+req.flash('error')+"' Info: '"+req.flash('info')+"' ");
-        res.render('auth/login', {
-            title: sitename,
-            uzenetek: req.flash()
-        });
+        res.render('auth/login');
     })
     .post(passport.authenticate('local-login', {
         successRedirect: '/user/list',
@@ -41,10 +36,7 @@ router.route('/auth/login')
 
 router.route('/auth/signup')
     .get(function(req, res) {
-        res.render('auth/signup', {
-            title: sitename,
-            uzenetek: req.flash()
-        });
+        res.render('auth/signup');
     })
     .post(passport.authenticate('local-signup', {
         successRedirect: '/user/list',
@@ -62,8 +54,7 @@ router.use('/auth/logout', function(req, res) {
 
 router.get('/', function(req, res) {
     res.render('home', {
-        title: sitename,
-        uzenetek: req.flash()
+        
     });
 });
 
@@ -110,11 +101,9 @@ router.route('/list').get(function(req, res) {
         .then(function(data) {
 
             res.render('list', {
-                title: sitename,
                 data: data,
                 dateQuery: req.query.dateQuery,
                 nameQuery: req.query.nameQuery,
-                uzenetek: req.flash()
             });
         })
         // Ha volt hiba fusson le ez
@@ -158,13 +147,20 @@ router.route('/user/list').get(ensureAuthenticated, function(req, res) {
     result
     // Ha nem volt hiba fusson le ez
         .then(function(data) {
-            res.render('user/item_list', {
-                title: sitename,
-                data: data,
-                dateQuery: req.query.dateQuery,
-                nameQuery: req.query.nameQuery,
-                uzenetek: req.flash()
-            });
+            if (req.xhr) {
+                res.render('user/item_list', {
+                    data: data,
+                    dateQuery: req.query.dateQuery,
+                    nameQuery: req.query.nameQuery,
+                    layout:false
+                });
+            }else{
+                res.render('user/item_list', {
+                    data: data,
+                    dateQuery: req.query.dateQuery,
+                    nameQuery: req.query.nameQuery
+                });
+            }
         })
         // Ha volt hiba fusson le ez
         .catch(function() {
@@ -179,22 +175,26 @@ router.route('/user/list').get(ensureAuthenticated, function(req, res) {
 router.route('/user/upload')
     .get(ensureAuthenticated, function(req, res) {
 
-        var result;
-        result = req.app.Models.category.find();
+        var result = req.app.Models.category.find();
 
         result
         // Ha nem volt hiba fusson le ez
             .then(function(data) {
-                res.render('upload', {
-                    title: sitename,
-                    categoryData: data,
-                    uzenetek: req.flash()
-                });
+                if (req.xhr) {
+                    res.render('upload', {
+                        categoryData: data,
+                        layout: false
+                    });
+                }else{
+                    res.render('upload', {
+                        categoryData: data
+                    });
+                }
             })
             // Ha volt hiba fusson le ez
             .catch(function() {
-                console.log('Hiba!!');
-                throw 'error';
+                //console.log('Hiba!!');
+                throw 'error finding categories';
             });
     })
     .post(ensureAuthenticated, function(req, res) {
@@ -215,10 +215,14 @@ router.route('/user/upload')
             .isInt();
 
         if (req.validationErrors()) {
-            req.validationErrors().forEach(function(error) {
+            req.validationErrors().forEach(function (error) {
                 req.flash('error', error.msg);
             });
-            res.redirect('/user/upload');
+            if (req.xhr) {
+                res.status(200).json(req.flash());
+            } else {
+                res.redirect('/user/upload');
+            }
         }
         else {
             req.app.Models.item.create({
@@ -230,19 +234,25 @@ router.route('/user/upload')
                 })
                 .then(function() {
                     req.flash('success', 'Hírdetés sikeresen felvéve');
-                    res.redirect('/user/upload');
+                    if (req.xhr) {
+                        res.status(200).json(req.flash());
+                    } else {
+                        res.redirect('/user/upload');
+                    }
                 })
                 .catch(function() {
                     req.flash('error', 'Hírdetés felvétele sikertelen!');
-                    res.redirect('/user/upload');
+                    if (req.xhr) {
+                        res.status(400).json(req.flash());
+                    } else {
+                        res.redirect('/user/upload');
+                    }
                 });
         }
 
     });
 
 router.route('/user/edit/:id').get(ensureAuthenticated, function(req, res) {
-
-
 
     var categoryResult = req.app.Models.category.find();
     var itemResult = req.app.Models.item.findOne({
@@ -258,10 +268,9 @@ router.route('/user/edit/:id').get(ensureAuthenticated, function(req, res) {
                 .then(function(itemData) {
 
                     res.render('user/item_edit', {
-                        title: sitename,
                         itemData: itemData,
                         categoryData: categoryData,
-                        uzenetek: req.flash()
+                        
                     });
                 })
                 // Ha volt hiba fusson le ez
@@ -275,9 +284,6 @@ router.route('/user/edit/:id').get(ensureAuthenticated, function(req, res) {
             console.log('Hiba!!');
             throw 'error';
         });
-
-
-
 
 }).post(ensureAuthenticated, function(req, res) {
 
@@ -330,11 +336,19 @@ router.use('/user/delete/:id', ensureAuthenticated, function(req, res) {
         })
         .then(function() {
             req.flash('success', 'Hírdetés sikeresen törölve');
-            res.redirect('/user/list');
+            if(req.xhr){
+                res.status(200).json(req.flash());
+            }else{
+                res.redirect('/user/list');
+            }
         })
         .catch(function() {
             req.flash('error', 'Hírdetés törlése sikertelen');
-            res.redirect('/user/list');
+            if(req.xhr){
+                res.status(400).json(req.flash());
+            }else{
+                res.redirect('/user/list');
+            }
         });;
 
 });
@@ -343,8 +357,7 @@ router.use('/user/delete/:id', ensureAuthenticated, function(req, res) {
 router.route('/op/categories/')
     .get(ensureAuthenticated, andRestrictTo('operator'), function(req, res) {
         res.render('op/category', {
-            title: sitename,
-            uzenetek: req.flash()
+            
         });
     })
     .post(ensureAuthenticated, andRestrictTo('operator'), function(req, res) {

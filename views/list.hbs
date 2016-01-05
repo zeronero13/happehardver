@@ -43,7 +43,7 @@
   <tbody>
     {{#each data as |product|}}
     <tr>
-      <td><a href="list/{{product.id}}" title="{{product.itemName}}">{{product.itemName}}</a></td>
+      <td><a href="/user/edit/{{product.id}}" title="{{product.itemName}}">{{product.itemName}}</a></td>
       <td>{{product.category.categoryName}}</td>
       <td>{{product.user.username}}</td>
       <td>{{{formatDate product.createdAt "YYYY/MM/DD"}}}</td>

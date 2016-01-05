@@ -39,19 +39,20 @@
       <th>Módosítva</th>
       <th>Ár</th>
       <th>Opciók</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     {{#each data as |product|}}
-    <tr>
-      <td><a href="list/{{product.id}}" title="{{product.itemName}}">{{product.itemName}}</a></td>
+    <tr class="productRow">
+      <td><a href="edit/{{product.id}}" title="{{product.itemName}}">{{product.itemName}}</a></td>
       <td>{{product.category.categoryName}}</td>
       <td>{{product.user.username}}</td>
       <td>{{{formatDate product.createdAt "YYYY/MM/DD"}}}</td>
       <td>{{{formatDate product.updatedAt "YYYY/MM/DD HH:mm:ss"}}}</td>
       <td>{{product.itemPrice}} HUF</td>
       <td>
-        <a href="/user/edit/{{product.id}}">Szerkesztés</a>
+        <a href="edit/{{product.id}}">Szerkeszt</a>
         <a href="/user/delete/{{product.id}}">Törlés</a>
       </td>
     </tr>

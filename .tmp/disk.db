@@ -34,24 +34,34 @@
     ],
     "item": [
       {
-        "itemName": "Dell Monitor &quot;19",
-        "itemPrice": 56000,
-        "itemDescription": "Dell Monitor leírása",
-        "category": 5,
+        "itemName": "MA-X22",
+        "itemPrice": 43453,
+        "itemDescription": "",
+        "category": 4,
         "user": 1,
-        "createdAt": "2015-10-26T10:35:16.096Z",
-        "updatedAt": "2015-10-26T10:35:16.096Z",
-        "id": 1
+        "createdAt": "2015-11-26T19:54:21.615Z",
+        "updatedAt": "2016-01-05T16:51:00.560Z",
+        "id": 55
       },
       {
-        "itemName": "Samsung 256 GB 850 EVO",
-        "itemPrice": 29000,
-        "itemDescription": "- Samsung 850 EVO széria\r\n- 2.5&quot; beszerelési méretek\r\n- 250GB össz tároló kapacitás\r\n- SATA-3 6GB&#x2F;s csatlakoztatás\r\n- Írási sebesség: 520MB&#x2F;s\r\n- Olvasási sebesség: 540MB&#x2F;s\r\n- 88000&#x2F;40000 IOPS műveletek\r\n- Samsung MGX Vezérlőegység\r\n- 2.4W átlagos áram felvétel\r\n- 7mm magasság, AES 256bit",
-        "category": 2,
+        "itemName": "Dell 888",
+        "itemPrice": 24800,
+        "itemDescription": "efsfsf",
+        "category": 5,
         "user": 1,
-        "createdAt": "2015-10-27T10:38:17.114Z",
-        "updatedAt": "2015-10-27T10:38:17.114Z",
-        "id": 2
+        "createdAt": "2016-01-05T17:31:19.663Z",
+        "updatedAt": "2016-01-05T17:31:19.663Z",
+        "id": 56
+      },
+      {
+        "itemName": "dafasf",
+        "itemPrice": 32342,
+        "itemDescription": "fsefs",
+        "category": 3,
+        "user": 1,
+        "createdAt": "2016-01-05T19:40:07.843Z",
+        "updatedAt": "2016-01-05T19:40:07.843Z",
+        "id": 57
       }
     ],
     "user": [
@@ -189,7 +199,7 @@
       "id": 5
     },
     "item": {
-      "id": 5
+      "id": 57
     },
     "user": {
       "id": 21
