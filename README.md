@@ -225,25 +225,27 @@ A tesztek futtatása: **npm test**
   npm start
   
 ### Feladat továbbfejlesztése
-II. Beadandó (opcionális)
-  
-Feladat a meglévő szerveroldali webalkalmazás progresszív fejlesztése a kliensoldalon, azaz olyan kliensoldali JavaScript kódok írása, melyek nélkül az alkalmazás továbbra is működőképes, de meglétükkel az alkalmazás használata kényelmesebb, gyorsabb, felhasználóbarátabb. Elvárások:
 
-  **Tétel felvétele (AJAX + JQuery.modal megjelen)**
-  Funkció szöveges leírása:
+  II. Beadandó (opcionális)
+  Feladat a meglévő szerveroldali webalkalmazás progresszív fejlesztése a kliensoldalon, azaz olyan kliensoldali JavaScript kódok írása, melyek nélkül az alkalmazás továbbra is működőképes, de meglétükkel az alkalmazás használata kényelmesebb, gyorsabb, felhasználóbarátabb.
+
+####**Tétel felvétele (AJAX + JQuery.modal megjelen)**
+  
+  **Funkció szöveges leírása:**
   
   Új tétel felvételekor, kicsi modal megnyilik melyben ki lehet tölteni és elküldeni feldolgozásra AJAX segítségével.
   
-  Szerver érintett fájlok:
+  **Szerver érintett fájlok:**
   * ./routes.js
 
-  Kliens érintett fájlok:
+  **Kliens érintett fájlok:**
   * ./public/js/scripts.js
 
-  Egyéb érintett fájlok:
+  **Egyéb érintett fájlok:**
   * ./views/layout.hbs
 
-  Funkció működésének leírása:
+  **Funkció működésének leírása:**
+  
   + layout.hbs-ben megadjuk, hogy töltse be a scripts.js-et fájlt
   + jquery bindeli, hogy "új tétel" linkre kattintás esetén fusson le funkció
   + nem engedjük meg a link default eseményét
@@ -255,25 +257,28 @@ Feladat a meglévő szerveroldali webalkalmazás progresszív fejlesztése a kli
       - Ha hibával tér vissza, megjelenítjüka hiba üzenetét és elrejtjük a modalt.
   + modalt megjelenítjük
   
-  Szekvenciadiagram:
+  **Szekvenciadiagram:**
+
   * Hírdetés feltöltése sikeresen (AJAX) (docs/images/ajax_upload_item.jpg)
 ![Hírdetés feltöltése (AJAX)](docs/images/ajax_upload_item.jpg)
 
-  **Tétel törlése**
-  Funkció szöveges leírása:
+####**Tétel törlése**
+  
+  **Funkció szöveges leírása:**
   
   Új tétel felvételekor, kicsi modal megnyilik melyben ki lehet tölteni és elküldeni feldolgozásra AJAX segítségével.
   
-  Szerver érintett fájlok:
+  **Szerver érintett fájlok:**
   * ./routes.js
 
-  Kliens érintett fájlok:
+  **Kliens érintett fájlok:**
   * ./public/js/scripts.js
-  * 
-  Egyéb érintett fájlok:
+
+  **Egyéb érintett fájlok:**
   * ./views/layout.hbs
 
-  Funkció működésének leírása:
+  **Funkció működésének leírása:**
+  
   + layout.hbs-ben megadjuk, hogy töltse be a scripts.js-et fájlt
   + jquery bindeli, hogy "törlés" linkre kattintás esetén fusson le funkció
   + nem engedjük meg a link default eseményét
@@ -281,6 +286,7 @@ Feladat a meglévő szerveroldali webalkalmazás progresszív fejlesztése a kli
     * Ha siker kóddal tér vissza akkor a tételt fadeOut-tal direktbe kitöröljük, ezután megjelenítjük a kapott üzenetet.
     * Ha hiba kóddal tér vissza akkor megjelenítjük a hiba üzenetét.
   
-  Szekvenciadiagram:
+  **Szekvenciadiagram:**
+
   * Hírdetés törlése sikeresen (AJAX) (docs/images/ajax_delete_item.jpg)
 ![Hírdetés törlése (AJAX)](docs/images/ajax_delete_item.jpg)
